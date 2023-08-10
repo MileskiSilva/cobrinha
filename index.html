@@ -39,9 +39,14 @@
 </head>
 
 <body>
+  <audio id="background-music" autoplay loop controls>
+    <source src="X2Download.app - Shadow 4EVER - MC VV (Prod MC VV) (128 kbps).mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
 
   <div id="game-container">
     <div class="snake"></div>
+    <div class="snake-head"></div>
     <div class="food"></div>
   </div>
   <div id="score-container">
@@ -53,6 +58,7 @@
   <script>
     const gameContainer = document.getElementById("game-container");
     const snake = document.querySelector(".snake");
+    const snakeHead = document.querySelector(".snake-head");
     const food = document.querySelector(".food");
     const scoreElement = document.getElementById("score");
     const startButton = document.getElementById("start-button");
@@ -95,7 +101,6 @@
         direction = "down";
       }
     });
-
 
     function moveSnake() {
       if (direction === "left") {
@@ -156,8 +161,17 @@
         score += 10;
         updateScore();
       }
+
+      // Atualize a cor da cabeça da cobra
+      const newSnakeHead = document.querySelector(`[style="left: ${snakeLeft}px; top: ${snakeTop}px;"]`);
+      if (newSnakeHead) {
+        newSnakeHead.style.backgroundColor = "blue"; // ou a cor desejada
+      }
+
       updateSnakePosition();
     }
+
+
 
     startButton.addEventListener("click", () => {
       startButton.style.display = "none";
