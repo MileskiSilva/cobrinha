@@ -7,10 +7,20 @@
   <style>
     #game-container {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: 400px;
+      height: 400px;
       border: 1px solid black;
       overflow: hidden;
+    }
+
+    #restart-button {
+      display: none;
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
     }
 
     .snake,
@@ -29,6 +39,7 @@
 </head>
 
 <body>
+
   <div id="game-container">
     <div class="snake"></div>
     <div class="food"></div>
@@ -36,19 +47,24 @@
   <div id="score-container">
     Score: <span id="score">0</span>
   </div>
+  <button id="start-button">ASSINE O TERMO..</button>
+  <button id="restart-button">Reiniciar Jogo</button>
 
   <script>
     const gameContainer = document.getElementById("game-container");
     const snake = document.querySelector(".snake");
     const food = document.querySelector(".food");
     const scoreElement = document.getElementById("score");
+    const startButton = document.getElementById("start-button");
+    const restartButton = document.getElementById("restart-button");
     let snakeLeft = 0;
     let snakeTop = 0;
-    let foodLeft = Math.floor(Math.random() * 15) * 20;
-    let foodTop = Math.floor(Math.random() * 15) * 20;
+    let foodLeft = Math.floor(Math.random() * 20) * 20;
+    let foodTop = Math.floor(Math.random() * 20) * 20;
     let snakeBody = [{ left: 0, top: 0 }];
     let direction = "right";
     let score = 0;
+    let gameInterval;
 
     function updateScore() {
       scoreElement.textContent = score;
@@ -76,14 +92,6 @@
       } else if (event.key === "ArrowUp" && direction !== "down") {
         direction = "up";
       } else if (event.key === "ArrowDown" && direction !== "up") {
-        direction = "down";
-      } else if (event.key === "a" && direction !== "right") {
-        direction = "left";
-      } else if (event.key === "d" && direction !== "left") {
-        direction = "right";
-      } else if (event.key === "w" && direction !== "down") {
-        direction = "up";
-      } else if (event.key === "s" && direction !== "up") {
         direction = "down";
       }
     });
@@ -125,11 +133,12 @@
       if (
         snakeLeft < 0 ||
         snakeTop < 0 ||
-        snakeLeft >= 300 ||
-        snakeTop >= 300
+        snakeLeft >= 400 ||
+        snakeTop >= 400
       ) {
         clearInterval(gameInterval);
-        alert("Game Over! Your Score: " + score);
+        alert("Game Over! Your Score: " + score + "\nleozou");
+        restartButton.style.display = "block";
       }
     }
 
@@ -139,8 +148,8 @@
       checkCollision();
       renderSnakeBody();
       if (snakeLeft === foodLeft && snakeTop === foodTop) {
-        foodLeft = Math.floor(Math.random() * 15) * 20;
-        foodTop = Math.floor(Math.random() * 15) * 20;
+        foodLeft = Math.floor(Math.random() * 20) * 20;
+        foodTop = Math.floor(Math.random() * 20) * 20;
         updateFoodPosition();
         updateSnakeBody();
         score += 10;
@@ -149,7 +158,26 @@
       updateSnakePosition();
     }
 
-    const gameInterval = setInterval(updateGame, 100);
+    startButton.addEventListener("click", () => {
+      startButton.style.display = "none";
+      gameInterval = setInterval(updateGame, 100);
+      updateFoodPosition();
+    });
+
+    restartButton.addEventListener("click", () => {
+      restartButton.style.display = "none";
+      snakeLeft = 0;
+      snakeTop = 0;
+      foodLeft = Math.floor(Math.random() * 20) * 20;
+      foodTop = Math.floor(Math.random() * 20) * 20;
+      snakeBody = [{ left: 0, top: 0 }];
+      direction = "right";
+      score = 0;
+      updateScore();
+      updateSnakePosition();
+      updateFoodPosition();
+      gameInterval = setInterval(updateGame, 100);
+    });
 
     updateFoodPosition();
   </script>
