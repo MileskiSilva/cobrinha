@@ -85,16 +85,17 @@
     }
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft" && direction !== "right") {
+      if (event.key === "ArrowLeft" || event.key === "a") {
         direction = "left";
-      } else if (event.key === "ArrowRight" && direction !== "left") {
+      } else if (event.key === "ArrowRight" || event.key === "d") {
         direction = "right";
-      } else if (event.key === "ArrowUp" && direction !== "down") {
+      } else if (event.key === "ArrowUp" || event.key === "w") {
         direction = "up";
-      } else if (event.key === "ArrowDown" && direction !== "up") {
+      } else if (event.key === "ArrowDown" || event.key === "s") {
         direction = "down";
       }
     });
+
 
     function moveSnake() {
       if (direction === "left") {
