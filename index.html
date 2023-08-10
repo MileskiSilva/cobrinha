@@ -33,17 +33,26 @@
     <div class="snake"></div>
     <div class="food"></div>
   </div>
+  <div id="score-container">
+    Score: <span id="score">0</span>
+  </div>
 
   <script>
     const gameContainer = document.getElementById("game-container");
     const snake = document.querySelector(".snake");
     const food = document.querySelector(".food");
+    const scoreElement = document.getElementById("score");
     let snakeLeft = 0;
     let snakeTop = 0;
     let foodLeft = Math.floor(Math.random() * 15) * 20;
     let foodTop = Math.floor(Math.random() * 15) * 20;
     let snakeBody = [{ left: 0, top: 0 }];
-    let direction = "right"; // Inicialmente, a cobra se move para a direita
+    let direction = "right";
+    let score = 0;
+
+    function updateScore() {
+      scoreElement.textContent = score;
+    }
 
     function updateSnakePosition() {
       snake.style.left = snakeLeft + "px";
@@ -67,6 +76,14 @@
       } else if (event.key === "ArrowUp" && direction !== "down") {
         direction = "up";
       } else if (event.key === "ArrowDown" && direction !== "up") {
+        direction = "down";
+      } else if (event.key === "a" && direction !== "right") {
+        direction = "left";
+      } else if (event.key === "d" && direction !== "left") {
+        direction = "right";
+      } else if (event.key === "w" && direction !== "down") {
+        direction = "up";
+      } else if (event.key === "s" && direction !== "up") {
         direction = "down";
       }
     });
@@ -112,7 +129,7 @@
         snakeTop >= 300
       ) {
         clearInterval(gameInterval);
-        alert("Game Over!");
+        alert("Game Over! Your Score: " + score);
       }
     }
 
@@ -126,8 +143,10 @@
         foodTop = Math.floor(Math.random() * 15) * 20;
         updateFoodPosition();
         updateSnakeBody();
+        score += 10;
+        updateScore();
       }
-      updateSnakePosition(); // Adicione esta linha
+      updateSnakePosition();
     }
 
     const gameInterval = setInterval(updateGame, 100);
