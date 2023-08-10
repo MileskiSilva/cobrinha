@@ -5,6 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    button {
+      font-size: 24px;
+      /* Tamanho da fonte dos botões */
+      margin: 5px;
+      /* Espaçamento entre os botões */
+      padding: 10px 20px;
+      /* Espaçamento interno dos botões */
+    }
+
+
+
+
     #game-container {
       position: relative;
       width: 400px;
@@ -54,6 +66,10 @@
   </div>
   <button id="start-button">ASSINE O TERMO..</button>
   <button id="restart-button">Reiniciar Jogo</button>
+  <button id="move-up-button">⬆</button>
+  <button id="move-down-button">⬇</button>
+  <button id="move-left-button">⬅</button>
+  <button id="move-right-button">➡</button>
 
   <script>
     const gameContainer = document.getElementById("game-container");
@@ -63,6 +79,11 @@
     const scoreElement = document.getElementById("score");
     const startButton = document.getElementById("start-button");
     const restartButton = document.getElementById("restart-button");
+    const moveUpButton = document.getElementById("move-up-button");
+    const moveDownButton = document.getElementById("move-down-button");
+    const moveLeftButton = document.getElementById("move-left-button");
+    const moveRightButton = document.getElementById("move-right-button");
+
     let snakeLeft = 0;
     let snakeTop = 0;
     let foodLeft = Math.floor(Math.random() * 20) * 20;
@@ -71,6 +92,24 @@
     let direction = "right";
     let score = 0;
     let gameInterval;
+
+    //Adicione eventos de clique para os botões de seta
+    moveUpButton.addEventListener("click", () => {
+      direction = "up";
+    });
+
+    moveDownButton.addEventListener("click", () => {
+      direction = "down";
+    });
+
+    moveLeftButton.addEventListener("click", () => {
+      direction = "left";
+    });
+
+    moveRightButton.addEventListener("click", () => {
+      direction = "right";
+    });
+
 
     function updateScore() {
       scoreElement.textContent = score;
