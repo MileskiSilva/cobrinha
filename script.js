@@ -55,14 +55,34 @@ function updateSnakeBody() {
 }
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft" || event.key === "a") {
-    direction = "left";
-  } else if (event.key === "ArrowRight" || event.key === "d") {
-    direction = "right";
-  } else if (event.key === "ArrowUp" || event.key === "w") {
-    direction = "up";
-  } else if (event.key === "ArrowDown" || event.key === "s") {
-    direction = "down";
+  if (
+    (event.key === "ArrowLeft" || event.key === "a") &&
+    direction !== "right" // Evitar voltar à direita
+  ) {
+    if (snakeBody.length === 1 || direction !== "left") {
+      direction = "left";
+    }
+  } else if (
+    (event.key === "ArrowRight" || event.key === "d") &&
+    direction !== "left" // Evitar voltar à esquerda
+  ) {
+    if (snakeBody.length === 1 || direction !== "right") {
+      direction = "right";
+    }
+  } else if (
+    (event.key === "ArrowUp" || event.key === "w") &&
+    direction !== "down" // Evitar voltar para baixo
+  ) {
+    if (snakeBody.length === 1 || direction !== "up") {
+      direction = "up";
+    }
+  } else if (
+    (event.key === "ArrowDown" || event.key === "s") &&
+    direction !== "up" // Evitar voltar para cima
+  ) {
+    if (snakeBody.length === 1 || direction !== "down") {
+      direction = "down";
+    }
   }
 });
 
