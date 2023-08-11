@@ -61,6 +61,21 @@
     .food {
       background-color: red;
     }
+
+    /* Estilos para dispositivos móveis */
+    @media (max-width: 500px) {
+      #game-container {
+        width: 90vw;
+        height: 90vw;
+      }
+
+      .snake,
+      .food,
+      .snake-body {
+        width: 15px;
+        height: 15px;
+      }
+    }
   </style>
 </head>
 
