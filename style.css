@@ -1,22 +1,57 @@
-<style>
-    #game-container {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      border: 1px solid black;
-      overflow: hidden;
-    }
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
 
-    .snake,
-    .food,
-    .snake-body {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: green;
-    }
+button {
+  font-size: 24px;
+  margin: 5px;
+  padding: 10px 20px;
+}
 
-    .food {
-      background-color: red;
-    }
-  </style>
+#game-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+#score-container {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+#audio-container {
+  margin-bottom: 10px;
+}
+
+#restart-button {
+  display: none;
+  padding: 5px 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.snake,
+.food,
+.snake-body {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  background-color: green;
+}
+
+.food {
+  background-color: red;
+}
+
+.up-button {
+  margin-left: 82px;
+}
